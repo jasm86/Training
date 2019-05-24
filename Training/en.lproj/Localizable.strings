@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Training
+
+  Created by Jorge Angel Sanchez Martinez on 5/25/19.
+  Copyright © 2019 Jorge Angel Sanchez Martinez. All rights reserved.
+*/
+app_name = "Rappi";
+default_error_message = "Ha ocurrido un error intente nuevamente";
+error_lodaing_home = "No se pudo encontrar ningun resultado";
