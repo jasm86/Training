@@ -11,7 +11,6 @@ import UIKit
 
 class ConnectionManager:  ConnectionInterface{
     private var defaultSession: URLSession?
-    private var dataTask: URLSessionDataTask?
     public static let shared: ConnectionInterface? = {
         
         guard let url = Api.baseUrl else {
@@ -26,12 +25,7 @@ class ConnectionManager:  ConnectionInterface{
         defaultSession = URLSession(configuration: config)
     }
     
-    public func cancelTask(){
-        dataTask?.cancel()
-    }
-    
     public func get(endPoint: Endpoint? = nil, parameters: [Parameter], completion: ConnectionCompletionHandler? = nil){
-        dataTask?.cancel()
         guard let url = Api.baseUrl else {
             completion?(nil, .connectionFail)
             return
@@ -52,9 +46,7 @@ class ConnectionManager:  ConnectionInterface{
                 completeParams.append("&")
             }
             urlComponents.query = completeParams
-            
-            dataTask = defaultSession?.dataTask(with: urlComponents.url ?? url) {data, response, error in
-                defer { self.dataTask = nil }
+            let dataTask = defaultSession?.dataTask(with: urlComponents.url ?? url) {data, response, error in
                 if let completion = completion {
                     var error: ConnectionError?
                     if let _ = data, let response = response as? HTTPURLResponse {
@@ -64,9 +56,6 @@ class ConnectionManager:  ConnectionInterface{
                     }else{
                         error = .connectionFail
                     }
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    }
                     completion(data, error)
                 }
             }
@@ -75,7 +64,6 @@ class ConnectionManager:  ConnectionInterface{
     }
     
     func post<T>(endPoint: Endpoint? = nil, parameter: T, pathComponents: PathComponent..., completion: ConnectionCompletionHandler? = nil) where T : Codable{
-        dataTask?.cancel()
         guard let url = Api.baseUrl else {
             completion?(nil, .connectionFail)
             return
@@ -105,9 +93,7 @@ class ConnectionManager:  ConnectionInterface{
             } catch {
                 completion?(nil, .connectionFail)
             }
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            dataTask = defaultSession?.dataTask(with: request) {data, response, error in
-                defer { self.dataTask = nil }
+            let dataTask = defaultSession?.dataTask(with: request) {data, response, error in
                 if let completion = completion {
                     var error: ConnectionError?
                     if let _ = data, let response = response as? HTTPURLResponse {
@@ -116,9 +102,6 @@ class ConnectionManager:  ConnectionInterface{
                         }
                     }else{
                         error = .connectionFail
-                    }
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                     completion(data, error)
                 }

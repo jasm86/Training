@@ -23,7 +23,6 @@ protocol ConnectionInterface{
     
     func get(endPoint: Endpoint?, parameters: [Parameter], completion: ConnectionCompletionHandler?)
     func post<T>(endPoint: Endpoint?, parameter: T,pathComponents: PathComponent..., completion: ConnectionCompletionHandler?) where T : Codable
-    func cancelTask()
 }
 
 enum ConnectionError: Error {
