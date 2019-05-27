@@ -5,19 +5,19 @@ Training app
 **VIPER**
 
 ## 1. Capas de la aplicacion
-La aplicacion esta planteada para que sea escalable por modulos siendo el de busqueda y detalla el cque se desarrollo y fue   desarrollada con un arquitectura VIPER (Vista, Interactor, Presenter, Entity y Router) ademas de contar con una interface de   coneccion para realiazar todas la peticiones. Adelate se describe las clases por las diferentes capas
+La aplicacion esta planteada para que sea escalable por modulos siendo el de busqueda y detalla el que se desarrollo y utilizando una arquitectura VIPER (Vista, Interactor, Presenter, Entity y Router) ademas de contar con una interface de   coneccion para realiazar todas la peticiones. Adelate se describe las clases por las diferentes capas
 
-Pantalla Home y de Busqueda
+- Pantalla Home y de Busqueda
   - Vista: SearchViewController y SearchViewControllerSB
   - Presenter: SearchViewPresenter
   - Interactor: SearchViewInteractor
   - Entity: EntityMostPopular, EntityMostRated y EntityUpcoming
-Pantalla Detalle
+- Pantalla Detalle
   - Vista: DetailViewController y DetailViewControllerSB
   - Presenter: DetailViewPresenter
   - Interactor: DetailViewInteractor
   - Entity: SearchResultModel (que puede ser de cualquier tipo EntityMostPopular, EntityMostRated y EntityUpcoming)
-Aplicacion general
+- Aplicacion general
   - Router de la aplicacion: RouterSearchDetail
   - Interface de Conexion: ConnectionManager
   
