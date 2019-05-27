@@ -12,7 +12,7 @@ protocol RouterSearchDetailProtocol: RoutableProtocol{
     func goForwardDetail(origin: ViewableProtocol?, searchResult: SearchResultModel?)
 }
 
-class RouterSearchDetail: RoutableProtocol{
+class RouterSearchDetail: RouterSearchDetailProtocol{
     static func createMainModule() -> UIViewController {
         let view = RouterSearchDetail.getSearchViewController()
         let presenter: PresentableProtocol & PresenterInteractorProtocol = SearchViewPresenter()

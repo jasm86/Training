@@ -11,11 +11,10 @@ import UIKit
 class DetailViewController: RappiViewController, DetailViewProtocol{
     public static let identifier = "DetailViewControllerIdentifier"
     var presenter: (PresentableProtocol & PresenterInteractorProtocol)?
-    @IBOutlet weak var descriptionSearchResult: UIImageView!
-    @IBOutlet weak var imageSearchResult: UIImageView!
+    @IBOutlet private weak var descriptionSearchResult: UILabel!
+    @IBOutlet private weak var imageSearchResult: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = SearchViewPresenter()
         presenter?.loadView()
     }
     
@@ -40,6 +39,7 @@ class DetailViewController: RappiViewController, DetailViewProtocol{
     }
     
     func showSearchResult(title: String, description: String, image: String) {
-        
+        setTitle(title: title, isLargeTitle: false)
+        self.descriptionSearchResult.text = description
     }
 }

@@ -13,9 +13,10 @@ class SearchViewInteractor: SearchViewInteractorProtocol{
     let dispatchGrouop = DispatchGroup()
     var responseMostPopular: EntityMostPopular?
     var responseMostRated: EntityMostRated?
-    var responseUpcoming: EntityUpcoming?
+    var responseUpcoming: EntityUpcoming?    
     
     public func fetchMainScreenSections(){
+        downloaConfig()
         fetchMostPopular()
         fetchMostRated()
         fetchUpcoming()
@@ -40,7 +41,7 @@ class SearchViewInteractor: SearchViewInteractorProtocol{
         var buildParams = EntityMostPopular.buildRequest()
         buildParams.append((key: "api_key", value: Api.key))
         dispatchGrouop.enter()
-        ConnectionManager.shared?.get(endPoint: nil, parameters: buildParams){[weak self] data, error in
+        ConnectionManager.shared?.get(endPoint: Api.Endpoints.discoverMovie.rawValue, parameters: buildParams){[weak self] data, error in
             guard let self = self else { return }
             if let error = error{
                 self.responseMostPopular = EntityMostPopular(error: error, results: [])
@@ -62,7 +63,7 @@ class SearchViewInteractor: SearchViewInteractorProtocol{
         var buildParams = EntityMostRated.buildRequest()
         buildParams.append((key: "api_key", value: Api.key))
         dispatchGrouop.enter()
-        ConnectionManager.shared?.get(endPoint: nil, parameters: buildParams){[weak self] data, error in
+        ConnectionManager.shared?.get(endPoint: Api.Endpoints.discoverMovie.rawValue, parameters: buildParams){[weak self] data, error in
             guard let self = self else { return }
             if let error = error{
                 self.responseMostRated = EntityMostRated(error: error, results: [])
@@ -84,7 +85,7 @@ class SearchViewInteractor: SearchViewInteractorProtocol{
         var buildParams = EntityUpcoming.buildRequest()
         buildParams.append((key: "api_key", value: Api.key))
         dispatchGrouop.enter()
-        ConnectionManager.shared?.get(endPoint: nil, parameters: buildParams){[weak self] data, error in
+        ConnectionManager.shared?.get(endPoint: Api.Endpoints.discoverMovie.rawValue, parameters: buildParams){[weak self] data, error in
             guard let self = self else { return }
             if let error = error{
                 self.responseUpcoming = EntityUpcoming(error: error, results: [])
@@ -96,6 +97,28 @@ class SearchViewInteractor: SearchViewInteractorProtocol{
                         return
                     }
                     self.responseUpcoming = EntityUpcoming(error: nil, results: responseSearch.results ?? [])
+                }
+            }
+            self.dispatchGrouop.leave()
+        }
+    }
+    
+    public func downloaConfig(){
+        var query: [Parameter] = []
+        query.append((key: "api_key", value: Api.key))
+        dispatchGrouop.enter()
+        ConnectionManager.shared?.get(endPoint: Api.Endpoints.config
+            .rawValue, parameters: query){[weak self] data, error in
+            guard let self = self else { return }
+            if error == nil{
+                if let response = data {
+                    let jsonDecoder = JSONDecoder()
+                    guard let responseConfig = try? jsonDecoder.decode(ResponseConfigModel.self, from: response) else{
+                        return
+                    }
+                    UserDefaults.setUrlImage(url: responseConfig.images?.baseUrl)
+                    UserDefaults.setImageHomeSize(size: responseConfig.images?.logoSizes?.first)
+                    UserDefaults.setImageDetailSize(size: responseConfig.images?.posterSizes?.first)
                 }
             }
             self.dispatchGrouop.leave()

@@ -32,7 +32,7 @@ class ProgressView: UIView {
         preservesSuperviewLayoutMargins = false
         translatesAutoresizingMaskIntoConstraints = false
         let margins = layoutMarginsGuide
-        backgroundColor = .lightGray
+        backgroundColor = UIColor.progressBackground()
         topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
         leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
         trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
@@ -43,7 +43,7 @@ class ProgressView: UIView {
         }
         spinner.translatesAutoresizingMaskIntoConstraints = false
         spinner.style = .whiteLarge
-        spinner.color = .blue
+        spinner.color = UIColor.progressColor()
         spinner.hidesWhenStopped = true
         addSubview(spinner)
         spinner.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true

@@ -38,6 +38,11 @@
 		0B4805EA229A745800D132E3 /* SearchResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4805E9229A745800D132E3 /* SearchResultModel.swift */; };
 		0B4805ED229A7BD100D132E3 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4805EC229A7BD100D132E3 /* SearchResultCell.swift */; };
 		0B4805F0229A7DB300D132E3 /* MediaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4805EF229A7DB300D132E3 /* MediaInfo.swift */; };
+		0B4805F2229B9C0300D132E3 /* RoundBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4805F1229B9C0300D132E3 /* RoundBackgroundView.swift */; };
+		0B4805F4229BA6E500D132E3 /* ResponseConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4805F3229BA6E500D132E3 /* ResponseConfigModel.swift */; };
+		0B4805F6229BA87900D132E3 /* ImageSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4805F5229BA87900D132E3 /* ImageSettingsModel.swift */; };
+		0B4805F8229BACD100D132E3 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4805F7229BACD100D132E3 /* Preferences.swift */; };
+		0B4805FA229BB21200D132E3 /* Colors+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4805F9229BB21200D132E3 /* Colors+Extension.swift */; };
 		296F5BBC229876CA003F8873 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296F5BBB229876CA003F8873 /* AppDelegate.swift */; };
 		296F5BC3229876CB003F8873 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 296F5BC2229876CB003F8873 /* Assets.xcassets */; };
 		296F5BC6229876CB003F8873 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296F5BC4229876CB003F8873 /* LaunchScreen.storyboard */; };
@@ -97,6 +102,11 @@
 		0B4805E9229A745800D132E3 /* SearchResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModel.swift; sourceTree = "<group>"; };
 		0B4805EC229A7BD100D132E3 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		0B4805EF229A7DB300D132E3 /* MediaInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaInfo.swift; sourceTree = "<group>"; };
+		0B4805F1229B9C0300D132E3 /* RoundBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundBackgroundView.swift; sourceTree = "<group>"; };
+		0B4805F3229BA6E500D132E3 /* ResponseConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseConfigModel.swift; sourceTree = "<group>"; };
+		0B4805F5229BA87900D132E3 /* ImageSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSettingsModel.swift; sourceTree = "<group>"; };
+		0B4805F7229BACD100D132E3 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		0B4805F9229BB21200D132E3 /* Colors+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+Extension.swift"; sourceTree = "<group>"; };
 		0B97A93C0499802643F0763B /* Pods-Training.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Training.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Training/Pods-Training.debug.xcconfig"; sourceTree = "<group>"; };
 		296F5BB8229876CA003F8873 /* Training.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Training.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		296F5BBB229876CA003F8873 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -189,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				0B4805AE229A142A00D132E3 /* ProgressView.swift */,
+				0B4805F1229B9C0300D132E3 /* RoundBackgroundView.swift */,
 			);
 			path = custom;
 			sourceTree = "<group>";
@@ -212,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				0B4805B4229A15EF00D132E3 /* Storyboard+Extension.swift */,
+				0B4805F9229BB21200D132E3 /* Colors+Extension.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -267,6 +279,8 @@
 			children = (
 				0B4805E7229A733F00D132E3 /* SearchResponseModel.swift */,
 				0B4805E9229A745800D132E3 /* SearchResultModel.swift */,
+				0B4805F3229BA6E500D132E3 /* ResponseConfigModel.swift */,
+				0B4805F5229BA87900D132E3 /* ImageSettingsModel.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -317,6 +331,7 @@
 				296F5BC7229876CC003F8873 /* Info.plist */,
 				0B4805D1229A33CC00D132E3 /* Localizable.strings */,
 				0B4805EF229A7DB300D132E3 /* MediaInfo.swift */,
+				0B4805F7229BACD100D132E3 /* Preferences.swift */,
 			);
 			path = Training;
 			sourceTree = "<group>";
@@ -568,12 +583,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B4805A7229A130700D132E3 /* SearchViewController.swift in Sources */,
+				0B4805F6229BA87900D132E3 /* ImageSettingsModel.swift in Sources */,
 				0B4805BC229A30F300D132E3 /* DetailViewController.swift in Sources */,
 				0B4805E5229A687800D132E3 /* SearchViewProtocol.swift in Sources */,
 				0B4805D9229A4F9300D132E3 /* EntityMostPopular.swift in Sources */,
 				0B4805B9229A1B6600D132E3 /* SearchViewInteractor.swift in Sources */,
+				0B4805F8229BACD100D132E3 /* Preferences.swift in Sources */,
 				0B4805DB229A4FE800D132E3 /* EntityMostRated.swift in Sources */,
 				0B48059A22991CBB00D132E3 /* Api.swift in Sources */,
+				0B4805F2229B9C0300D132E3 /* RoundBackgroundView.swift in Sources */,
 				0B4805A9229A134C00D132E3 /* BaseViewController.swift in Sources */,
 				296F5BBC229876CA003F8873 /* AppDelegate.swift in Sources */,
 				0B4805C0229A319F00D132E3 /* DetailViewPresenter.swift in Sources */,
@@ -586,10 +604,12 @@
 				0B480595229918D200D132E3 /* ReachabilityManager.swift in Sources */,
 				0B4805A5229A11EC00D132E3 /* RouterSearchDetail.swift in Sources */,
 				0B4805C2229A31F800D132E3 /* DetailViewInteractor.swift in Sources */,
+				0B4805FA229BB21200D132E3 /* Colors+Extension.swift in Sources */,
 				0B480597229919F900D132E3 /* ApiInterface.swift in Sources */,
 				0B4805AC229A139C00D132E3 /* GenericScreenProtocols.swift in Sources */,
 				0B4805B7229A16E900D132E3 /* SearchViewPresenter.swift in Sources */,
 				0B4805E8229A733F00D132E3 /* SearchResponseModel.swift in Sources */,
+				0B4805F4229BA6E500D132E3 /* ResponseConfigModel.swift in Sources */,
 				0B4805DE229A500500D132E3 /* EntityUpcoming.swift in Sources */,
 				0B4805B5229A15EF00D132E3 /* Storyboard+Extension.swift in Sources */,
 				0B4805E3229A685C00D132E3 /* DetailViewProtocols.swift in Sources */,

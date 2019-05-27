@@ -10,9 +10,14 @@ import Foundation
 class Api: ApiInterface{
     static let key = "42da555c2feb644c6ed275ab2c138235"
     static var baseUrl: URL? {
-        guard let url = URL.init(string: "https://api.themoviedb.org/3/discover/movie") else {
+        guard let url = URL.init(string: "https://api.themoviedb.org/3/") else {
             return nil
         }
         return url
+    }
+    
+    enum Endpoints: Endpoint {
+        case discoverMovie = "discover/movie"
+        case config = "configuration"
     }
 }

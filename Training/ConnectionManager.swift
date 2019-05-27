@@ -32,7 +32,6 @@ class ConnectionManager:  ConnectionInterface{
         }
         var completeUrl = url.absoluteString
         if let endPoint = endPoint {
-            completeUrl.append("/")
             completeUrl.append(endPoint)
         }
         completeUrl.append("?")
@@ -79,7 +78,7 @@ class ConnectionManager:  ConnectionInterface{
             completeUrl.append(pathComponent)
         }
         print(completeUrl)
-        if var urlComponents = URLComponents(string: completeUrl) {
+        if let urlComponents = URLComponents(string: completeUrl) {
             var request = URLRequest(url: urlComponents.url ?? url)
             request.httpMethod = "POST"
             var headers = request.allHTTPHeaderFields ?? [:]

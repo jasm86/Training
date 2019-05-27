@@ -38,6 +38,7 @@ class SearchResultCell: UITableViewCell{
     }
     
     fileprivate func fill(searchReleaseDate: String?, titleSearch: String?, searchImage: String?){
-        
+        self.titleSearch.text = titleSearch
+        self.searchReleaseDate.text = searchReleaseDate
     }
 }
