@@ -13,6 +13,13 @@ struct SearchResultCellModel: DrawableCellProtocol{
     var searchReleaseDate: String?
     var titleSearch: String?
     var searchImage: String?
+    var isEnable = true
+    
+    init(searchReleaseDate: String?, titleSearch: String?, searchImage: String?) {
+        self.searchReleaseDate = searchReleaseDate
+        self.titleSearch = titleSearch
+        self.searchImage = searchImage
+    }
     
     func cellForTableView(_ tableView: UITableView, atIndexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(withIdentifier: SearchResultCell.identifier, for: atIndexPath)

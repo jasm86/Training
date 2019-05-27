@@ -32,7 +32,7 @@ En este modulo para poder tener un mejor performance de la app de envian las 4 p
 
   - Entity: Va ligado directamente al Interactor ya que es el modelado de las respuestas de los servicios o de los elemento que se puedan persistir, en este caso se tienen tres entities una por cada categoria pero se modifico la estructura comun de las entidades para que guardaran el codigo de respuesta de la peticion ya que se ejecutan de manera concurrente. Para el caso de la pantalla de detalle no se tiene un "entity" particular si no que se pasa del interactor de la pantalla de busqueda
 
-  - Router: Se encarga de la creacion de uno o mas modulos y la navegacion dentro de estos mismos. En la aplicacion hay solo un modulo que es el de busqueda y detalle y la unica navegacion es entre dichas pantallas, pero podriamos crear un nuevo modulo por ejemplo de favoritos o settings y ponerlos en tabs ya sea con el mismo router si no es muy extensa o bien un router por modulo y desoues uno de la aplicacion
+  - Router: Se encarga de la creacion de uno o mas modulos y la navegacion dentro de estos mismos. En la aplicacion hay solo un modulo que es el de busqueda y detalle y la unica navegacion es entre dichas pantallas, pero podriamos crear un nuevo modulo por ejemplo de favoritos o settings y ponerlos en tabs ya sea con el mismo router si no es muy extensa o bien un router por modulo y otro general de la aplicacion
 
 
 ## 3. Conexiones de Modulos:

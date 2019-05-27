@@ -86,15 +86,59 @@ class SearchViewController: RappiViewController, SearchViewProtocol{
     }
     
     override func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text, !searchText.isEmpty {        
-//            SearchRequester.searchVideo(for: searchText, callback: { error, result in
-//                if error == nil{
-//                    self.results = result
-//                    self.tableSearchResults.reloadData()
-//                }else{
-//                    self.showMessage(title:  NSLocalizedString("ALERT_SEARCH_TITLE", comment: "Busqueda"), message:  NSLocalizedString("ALERT_SEARCH_ERROR_MESSAGE", comment: "aceptar"))
-//                }
-//            })
+        if let searchText = searchController.searchBar.text {
+            self.cellsMostPopular = self.cellsMostPopular.map{ cellModel in
+                if var model = cellModel as? SearchResultCellModel, let title = model.titleSearch {
+                    if searchText.isEmpty{
+                        model.isEnable = true
+                        return model
+                    }
+                    else if title.indices(of: searchText).count > 0 {
+                        model.isEnable = true
+                        return model
+                    }else{
+                        model.isEnable = false
+                        return model
+                    }
+                }else{
+                    return cellModel
+                }
+            }
+            self.cellsMostRated = self.cellsMostRated.map{ cellModel in
+                if var model = cellModel as? SearchResultCellModel, let title = model.titleSearch {
+                    if searchText.isEmpty{
+                        model.isEnable = true
+                        return model
+                    }
+                    else if title.indices(of: searchText).count > 0 {
+                        model.isEnable = true
+                        return model
+                    }else{
+                        model.isEnable = false
+                        return model
+                    }
+                }else{
+                    return cellModel
+                }
+            }
+            self.cellsUpcoming = self.cellsUpcoming.map{ cellModel in
+                if var model = cellModel as? SearchResultCellModel, let title = model.titleSearch {
+                    if searchText.isEmpty{
+                        model.isEnable = true
+                        return model
+                    }
+                    else if title.indices(of: searchText).count > 0 {
+                        model.isEnable = true
+                        return model
+                    }else{
+                        model.isEnable = false
+                        return model
+                    }
+                }else{
+                    return cellModel
+                }
+            }
+            self.tableContent.reloadData()
         }
     }
 }
@@ -113,11 +157,17 @@ extension SearchViewController: UITableViewDataSource{
         if let section = section{
             switch section {
                 case .mostPopular:
-                    return cellsMostPopular.count
+                    return cellsMostPopular.filter({
+                        ($0 as? SearchResultCellModel)?.isEnable ?? true
+                    }).count
                 case .mostRated:
-                    return cellsMostRated.count
+                    return cellsMostRated.filter({
+                        ($0 as? SearchResultCellModel)?.isEnable ?? true
+                    }).count
                 case .upcoming:
-                    return cellsUpcoming.count
+                    return cellsUpcoming.filter({
+                        ($0 as? SearchResultCellModel)?.isEnable ?? true
+                    }).count
                 }
         }else{
             return 0
@@ -129,17 +179,23 @@ extension SearchViewController: UITableViewDataSource{
             let section = presenter.homeSection(for: indexPath.section)
             switch section {
                 case .mostPopular:
-                    let cellModel = cellsMostPopular[indexPath.row]
+                    let cellModel = cellsMostPopular.filter({
+                        ($0 as? SearchResultCellModel)?.isEnable ?? true
+                    })[indexPath.row]
                     let cell = cellModel.cellForTableView(tableView, atIndexPath: indexPath)
                     cellModel.drawCell(cell)
                     return cell
                 case .mostRated:
-                    let cellModel = cellsMostRated[indexPath.row]
+                    let cellModel = cellsMostRated.filter({
+                        ($0 as? SearchResultCellModel)?.isEnable ?? true
+                    })[indexPath.row]
                     let cell = cellModel.cellForTableView(tableView, atIndexPath: indexPath)
                     cellModel.drawCell(cell)
                     return cell
                 case .upcoming:
-                    let cellModel = cellsUpcoming[indexPath.row]
+                    let cellModel = cellsUpcoming.filter({
+                        ($0 as? SearchResultCellModel)?.isEnable ?? true
+                    })[indexPath.row]
                     let cell = cellModel.cellForTableView(tableView, atIndexPath: indexPath)
                     cellModel.drawCell(cell)
                     return cell
@@ -155,11 +211,47 @@ extension SearchViewController: UITableViewDelegate {
             let section = presenter.homeSection(for: indexPath.section)
             switch section {
             case .mostPopular:
-                presenter.selectedMosPopular(index: indexPath.row, section: .mostPopular)
+                let cellModelFiltered = cellsMostPopular.filter({
+                    ($0 as? SearchResultCellModel)?.isEnable ?? true
+                })[indexPath.row]
+                var indexUnfiltered = 0
+                for (index, model) in cellsMostPopular.enumerated(){
+                    if let model = model as? SearchResultCellModel,
+                        let cellModelFiltered = cellModelFiltered as? SearchResultCellModel{
+                        if model.isEnable && model.titleSearch == cellModelFiltered.titleSearch{
+                            indexUnfiltered = index
+                        }
+                    }
+                }
+                presenter.selectedMosPopular(index: indexUnfiltered, section: .mostPopular)
             case .mostRated:
-                presenter.selectedMosRated(index: indexPath.row, section: .mostRated)
+                let cellModelFiltered = cellsMostRated.filter({
+                    ($0 as? SearchResultCellModel)?.isEnable ?? true
+                })[indexPath.row]
+                var indexUnfiltered = 0
+                for (index, model) in cellsMostRated.enumerated(){
+                    if let model = model as? SearchResultCellModel,
+                        let cellModelFiltered = cellModelFiltered as? SearchResultCellModel{
+                        if model.isEnable && model.titleSearch == cellModelFiltered.titleSearch{
+                            indexUnfiltered = index
+                        }
+                    }
+                }
+                presenter.selectedMosRated(index: indexUnfiltered, section: .mostRated)
             case .upcoming:
-                presenter.selectedUpcoming(index: indexPath.row, section: .upcoming)
+                let cellModelFiltered = cellsUpcoming.filter({
+                    ($0 as? SearchResultCellModel)?.isEnable ?? true
+                })[indexPath.row]
+                var indexUnfiltered = 0
+                for (index, model) in cellsUpcoming.enumerated(){
+                    if let model = model as? SearchResultCellModel,
+                        let cellModelFiltered = cellModelFiltered as? SearchResultCellModel{
+                        if model.isEnable && model.titleSearch == cellModelFiltered.titleSearch{
+                            indexUnfiltered = index
+                        }
+                    }
+                }
+                presenter.selectedUpcoming(index: indexUnfiltered, section: .upcoming)
             }
         }
     }

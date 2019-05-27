@@ -29,7 +29,7 @@ class SearchViewInteractor: SearchViewInteractorProtocol{
                 if let responseMostPopular = self.responseMostRated{
                     searchPresenter.didResponseMostRated(error: responseMostPopular.error, data: responseMostPopular.results)
                 }
-                if let responseMostPopular = self.responseMostPopular{
+                if let responseMostPopular = self.responseUpcoming{
                     searchPresenter.didResponseUpcoming(error: responseMostPopular.error, data: responseMostPopular.results)
                 }
                 searchPresenter.didFinishFetchMainScreenSections()
