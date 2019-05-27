@@ -9,18 +9,10 @@
 import Foundation
 import UIKit
 
-class ConnectionManager{
+class ConnectionManager:  ConnectionInterface{
     private var defaultSession: URLSession?
     private var dataTask: URLSessionDataTask?
-    
-    private init() {
-        let config: URLSessionConfiguration = .default
-        defaultSession = URLSession(configuration: config)
-    }
-}
-
-extension ConnectionManager:  ConnectionInterface{
-    static var shared: ConnectionInterface? = {
+    public static let shared: ConnectionInterface? = {
         
         guard let url = Api.baseUrl else {
             return nil
@@ -29,6 +21,10 @@ extension ConnectionManager:  ConnectionInterface{
         return connectionManager
     }()
     
+    private init() {
+        let config: URLSessionConfiguration = .default
+        defaultSession = URLSession(configuration: config)
+    }
     
     public func cancelTask(){
         dataTask?.cancel()
@@ -71,7 +67,7 @@ extension ConnectionManager:  ConnectionInterface{
                     DispatchQueue.main.async {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
-                    completion(nil, error)
+                    completion(data, error)
                 }
             }
             dataTask?.resume()
@@ -124,7 +120,7 @@ extension ConnectionManager:  ConnectionInterface{
                     DispatchQueue.main.async {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
-                    completion(nil, error)
+                    completion(data, error)
                 }
             }
             dataTask?.resume()

@@ -9,8 +9,19 @@
 import Foundation
 
 
-enum Sections: String {
-    case mostPopular = "mostPopular"
-    case mostRated = "mostRated"
-    case upcoming = "upcoming"
+enum Sections {
+    case mostPopular
+    case mostRated
+    case upcoming
+    
+    public var description: String {
+        switch self {
+            case .mostPopular:
+                return "mostPopular".localized()
+            case .mostRated:
+                return "mostRated".localized()
+            case .upcoming:
+                return "upcoming".localized()            
+        }
+    }
 }

@@ -77,7 +77,7 @@ extension SearchViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (presenter as? SearchViewPresenterProtocol)?.homeSection(for: section).rawValue
+        return (presenter as? SearchViewPresenterProtocol)?.homeSection(for: section).description
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

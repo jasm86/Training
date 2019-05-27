@@ -20,7 +20,6 @@ protocol ConnectionInterface{
     typealias ConnectionCompletionHandler = (Data?, ConnectionError?) -> Void
     typealias PathComponent = String
     typealias Endpoint = String
-    static var shared: ConnectionInterface? { get }
     
     func get(endPoint: Endpoint?, parameters: [Parameter], completion: ConnectionCompletionHandler?)
     func post<T>(endPoint: Endpoint?, parameter: T,pathComponents: PathComponent..., completion: ConnectionCompletionHandler?) where T : Codable

@@ -8,3 +8,6 @@
 app_name = "Rappi";
 default_error_message = "Ha ocurrido un error intente nuevamente";
 error_lodaing_home = "No se pudo encontrar ningun resultado";
+mostPopular = "Mas populares";
+mostRated = "Mejor calificadas";
+upcoming = "Proximamente";

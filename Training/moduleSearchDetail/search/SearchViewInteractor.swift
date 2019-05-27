@@ -31,15 +31,15 @@ class SearchViewInteractor: SearchViewInteractorProtocol{
                 if let responseMostPopular = self.responseMostPopular{
                     searchPresenter.didResponseUpcoming(error: responseMostPopular.error, data: responseMostPopular.results)
                 }
-                
+                searchPresenter.didFinishFetchMainScreenSections()
             }
         }
     }
     
     public func fetchMostPopular(){
-        dispatchGrouop.enter()
         var buildParams = EntityMostPopular.buildRequest()
         buildParams.append((key: "api_key", value: Api.key))
+        dispatchGrouop.enter()
         ConnectionManager.shared?.get(endPoint: nil, parameters: buildParams){[weak self] data, error in
             guard let self = self else { return }
             if let error = error{
@@ -59,9 +59,9 @@ class SearchViewInteractor: SearchViewInteractorProtocol{
     }
     
     public func fetchMostRated(){
-        dispatchGrouop.enter()
         var buildParams = EntityMostRated.buildRequest()
         buildParams.append((key: "api_key", value: Api.key))
+        dispatchGrouop.enter()
         ConnectionManager.shared?.get(endPoint: nil, parameters: buildParams){[weak self] data, error in
             guard let self = self else { return }
             if let error = error{
@@ -83,6 +83,7 @@ class SearchViewInteractor: SearchViewInteractorProtocol{
     public func fetchUpcoming(){
         var buildParams = EntityUpcoming.buildRequest()
         buildParams.append((key: "api_key", value: Api.key))
+        dispatchGrouop.enter()
         ConnectionManager.shared?.get(endPoint: nil, parameters: buildParams){[weak self] data, error in
             guard let self = self else { return }
             if let error = error{
