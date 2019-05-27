@@ -84,6 +84,19 @@ class SearchViewController: RappiViewController, SearchViewProtocol{
     func updateUI() {
         tableContent.reloadData()
     }
+    
+    override func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {        
+//            SearchRequester.searchVideo(for: searchText, callback: { error, result in
+//                if error == nil{
+//                    self.results = result
+//                    self.tableSearchResults.reloadData()
+//                }else{
+//                    self.showMessage(title:  NSLocalizedString("ALERT_SEARCH_TITLE", comment: "Busqueda"), message:  NSLocalizedString("ALERT_SEARCH_ERROR_MESSAGE", comment: "aceptar"))
+//                }
+//            })
+        }
+    }
 }
 
 extension SearchViewController: UITableViewDataSource{

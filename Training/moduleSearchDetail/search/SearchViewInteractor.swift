@@ -117,8 +117,8 @@ class SearchViewInteractor: SearchViewInteractorProtocol{
                         return
                     }
                     UserDefaults.setUrlImage(url: responseConfig.images?.baseUrl)
-                    UserDefaults.setImageHomeSize(size: responseConfig.images?.logoSizes?.first)
-                    UserDefaults.setImageDetailSize(size: responseConfig.images?.posterSizes?.first)
+                    UserDefaults.setImageHomeSize(size: responseConfig.images?.logoSizes?.last)
+                    UserDefaults.setImageDetailSize(size: responseConfig.images?.posterSizes?.last)
                 }
             }
             self.dispatchGrouop.leave()
@@ -128,11 +128,11 @@ class SearchViewInteractor: SearchViewInteractorProtocol{
     func searchResult(at index: Int, section: Sections) -> SearchResultModel? {
         switch section {
             case .mostPopular:
-                return responseMostRated?.results[index]
+                return responseMostPopular?.results[index]
             case .mostRated:
                 return responseMostRated?.results[index]
             case .upcoming:
-                return responseMostRated?.results[index]
+                return responseUpcoming?.results[index]
         }
     }
 }

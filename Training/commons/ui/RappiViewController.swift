@@ -43,6 +43,5 @@ extension BaseViewController: UISearchResultsUpdating{
     
     func updateSearchResults(for searchController: UISearchController) {
         
-    }
-    
+    }    
 }
