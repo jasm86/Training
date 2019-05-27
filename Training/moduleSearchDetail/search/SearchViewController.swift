@@ -16,17 +16,32 @@ class SearchViewController: RappiViewController, SearchViewProtocol{
     private var cellsMostRated: [DrawableCellProtocol] = []
     private var cellsUpcoming: [DrawableCellProtocol] = []
     @IBOutlet private weak var tableContent: UITableView!
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+            #selector(SearchViewController.refresh(_:)),
+                                 for: UIControl.Event.valueChanged)
+        refreshControl.tintColor = UIColor.red
+        
+        return refreshControl
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setTitle(title: "app_name".localized(), isLargeTitle: true)
         addSearchBar()
+        setupTableView()
+        presenter?.loadView()
+    }
+    
+    @objc func refresh(_ refreshControl: UIRefreshControl) {
         presenter?.loadView()
     }
     
     private func setupTableView() {
         tableContent.rowHeight = UITableView.automaticDimension
         tableContent.estimatedRowHeight = estimatedRowHeight
+        tableContent.addSubview(self.refreshControl)
     }
     
     func showError(error: String?) {
@@ -38,11 +53,11 @@ class SearchViewController: RappiViewController, SearchViewProtocol{
     }
     
     func displayProgress() {
-        showProgress()
+        refreshControl.beginRefreshing()
     }
     
     func dissmisProgress() {
-        dismissProgress()
+        refreshControl.endRefreshing()
     }
     
     func showMostPopular(data: [SearchResultModel]){

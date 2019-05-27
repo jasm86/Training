@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Kingfisher
+
 struct SearchResultCellModel: DrawableCellProtocol{
     var searchReleaseDate: String?
     var titleSearch: String?
@@ -18,7 +20,7 @@ struct SearchResultCellModel: DrawableCellProtocol{
     
     func drawCell(_ cell: UITableViewCell) {
         if let cell = cell as? SearchResultCell{
-            cell.fill(searchReleaseDate: searchReleaseDate, titleSearch: titleSearch, searchImage: searchImage)
+            cell.fill(searchReleaseDate: searchReleaseDate, titleSearch: titleSearch, image: searchImage)
         }
     }
 }
@@ -37,8 +39,24 @@ class SearchResultCell: UITableViewCell{
         super.awakeFromNib()
     }
     
-    fileprivate func fill(searchReleaseDate: String?, titleSearch: String?, searchImage: String?){
+    fileprivate func fill(searchReleaseDate: String?, titleSearch: String?, image: String?){
         self.titleSearch.text = titleSearch
         self.searchReleaseDate.text = searchReleaseDate
+        if let imagePath = image {
+            var imageUrl = UserDefaults.urlImage()
+            imageUrl.append(UserDefaults.imageHomeSize())
+            imageUrl.append(imagePath)
+            
+            let url = URL(string: imageUrl)
+            searchImage.kf.indicatorType = .activity
+            searchImage.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "defaultMovie"),
+                options: [
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ])
+        }
+        
     }
 }

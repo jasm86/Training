@@ -41,5 +41,19 @@ class DetailViewController: RappiViewController, DetailViewProtocol{
     func showSearchResult(title: String, description: String, image: String) {
         setTitle(title: title, isLargeTitle: false)
         self.descriptionSearchResult.text = description
+        
+        var imageUrl = UserDefaults.urlImage()
+        imageUrl.append(UserDefaults.imageDetailSize())
+        imageUrl.append(image)
+        
+        let url = URL(string: imageUrl)
+        imageSearchResult.kf.indicatorType = .activity
+        imageSearchResult.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "defaultMovie"),
+            options: [
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
     }
 }
