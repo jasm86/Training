@@ -35,3 +35,16 @@ En este modulo para poder tener un mejor performance de la app de envian las 4 p
   - Router: Se encarga de la creacion de uno o mas modulos y la navegacion dentro de estos mismos. En la aplicacion hay solo un modulo que es el de busqueda y detalle y la unica navegacion es entre dichas pantallas, pero podriamos crear un nuevo modulo por ejemplo de favoritos o settings y ponerlos en tabs ya sea con el mismo router si no es muy extensa o bien un router por modulo y desoues uno de la aplicacion
 
 
+## 3. Conexiones de Modulos:
+
+Mediante programacion orientada a protocolos se realizo la conexion entre las diferentes capas de la app canstando de dos nivles principales
+
+El primer nivel es una capa generica y consta de una serie de protocolos base que requiere cualquier arquitectura VIPER y despues por cada componente de cada modulo se tienen un set de protocolos que extienden de los base para ya realizar las tareas especificas ya sea de la pantalla de busqueda o la de detalle
+
+## 4. Principio de responsabilidad unica SRP:
+
+El SRP es que nos indica que cada modulo funcion o elemento debe tener una sola tarea o funcionalidad de la aplicacion, y es el principio fundamental de cualquier arquitectura clean y nos permite tener bien separado todos los elementos de la aplicacion
+
+## 5. Caracteristicas de un codigo limpio
+
+En mi opinion un codigo limpio es aquel que tiene bien separado cada parte de la aplicacion, muchas veces no necesariamente bajo el rigor de alguna arquitectura en especifico y va desde la estructura de las carpetas que es la primera impresion que se ve cuando  tomas un codigo nuevo, pasando par la separacion de componentes de la aplicacion como serian clases de utilerias y componentes reutilizables por cualquier aplicacion independientemente si es la nuestra o no, hasta ya la separacion de los elementos de la aplicacion como son persistencia, ws, pantallas, manejadores de contenido dinamico etc. 
